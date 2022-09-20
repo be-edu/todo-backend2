@@ -1,4 +1,4 @@
-name: build-and-push-todo-backend
+name: build-and-push-todo-backend2
 on: [push]
 jobs:
   build-and-push:
@@ -22,7 +22,13 @@ jobs:
         run: mkdir ~/artifact
 
       - name: Build
-        run: go build -v ./...
+        run: go build -o ~/artifact
 
       - name: Show build
-        run: ls -l ./..
+        run: ls -l ~/artifact
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ~/artifact/
